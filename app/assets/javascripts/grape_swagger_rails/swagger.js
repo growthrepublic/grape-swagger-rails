@@ -1077,17 +1077,36 @@
         values = {};
         for (key in possibleParams) {
           value = possibleParams[key];
-          if (this.params[value.name]) {
+          if (!this.params[value.name]) { continue; }
+
+          if (value.type === "Array") {
+            values[value.name] = this.params[value.name].split(',');
+          else
             values[value.name] = this.params[value.name];
           }
         }
         urlEncoded = "";
         for (key in values) {
           value = values[key];
+
           if (urlEncoded !== "") {
             urlEncoded += "&";
           }
-          urlEncoded += encodeURIComponent(key) + '=' + encodeURIComponent(value);
+
+          urlEncoded += (function() {
+            var _encodedParts = [], _encodedKey = encodeURIComponent(key);
+
+            if (typeof(value.forEach) === "function") {
+              value.forEach(function(singleValue) {
+                _encodedParts.push(_encodedKey + "[]=" + encodeURIComponent(singleValue));
+              });
+            }
+            else {
+              _encodedParts.push(_encodedKey + '=' + encodeURIComponent(value));
+            }
+
+            return _encodedParts.join("&");
+          }).call(this);
         }
         body = urlEncoded;
       }
