@@ -1081,7 +1081,7 @@
 
           if (value.type === "Array") {
             values[value.name] = this.params[value.name].split(',');
-          else
+          } else {
             values[value.name] = this.params[value.name];
           }
         }
