@@ -7,16 +7,12 @@ Swagger UI as Rails Engine for grape-swagger gem
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'grape-swagger-rails'
+gem 'grape-swagger-rails', github: 'growthrepublic/grape-swagger-rails'
 ```
 
 And then execute:
 
     $ bundle
-
-Or install it yourself as:
-
-    $ gem install grape-swagger-rails
 
 ## Usage
 
@@ -88,6 +84,10 @@ The block above is stored in the `authentication_proc` option:
 ```ruby
 GrapeSwaggerRails.options.authentication_proc: Proc.new{|request| # return a boolean value}
 ```
+
+### Changes against mainstream
+
+1. Added support for array values (separate them by comma)
 
 ## Contributing
 
