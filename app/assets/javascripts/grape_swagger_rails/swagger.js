@@ -1080,7 +1080,7 @@
           if (!this.params[value.name]) { continue; }
 
           if (value.type === "Array") {
-            values[value.name] = this.params[value.name].split(',');
+            values[value.name] = JSON.parse(this.params[value.name]);
           } else {
             values[value.name] = this.params[value.name];
           }
